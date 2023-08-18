@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Sign in</h2>
+    {% if error %}
+        <form method='POST'>
+            {% csrf_token %}
+            {{ error }}
+            <input type='submit' value='Sign in' />
+        </form>
+    {% else %}
+        <form method='POST'>
+            {% csrf_token %}
+            {% for field in form %}
+            <p>{{ field.label_tag }} {{ field }}</p>
+            {% endfor %}
+            <input type='submit' value='Sign in' />
+        </form>
+    {% endif %}
+
+{% endblock %}

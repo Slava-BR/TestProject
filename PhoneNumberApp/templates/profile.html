@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Телефон: {{ user.phone_number }}</p>
+    <p>Код для приглашений: {{ user.invite_code }}</p>
+    {% if  form%}
+        {{ error }}
+        <form method='POST'>
+            {% csrf_token %}
+            {{ code }}
+            <input type='submit' value='confirm'/>
+        </form>
+    {% else %}
+        <p>Код приглашения:</p>
+        {{ code }}
+    {% endif %}
+    <p>Приглашенные вами люди:</p>
+    {% for number in numbers.values %}
+        <p>{{ number.phone_number }}</p>
+    {% endfor %}
+    <form action="/logout" method="get">
+        <button type="submit">Выйти</button>
+    </form>
+{% endblock %}
